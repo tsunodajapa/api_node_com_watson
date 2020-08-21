@@ -1,0 +1,17 @@
+{
+  "name": "api_node_com_watson",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "https://github.com/tsunodajapa/api_node_com_watson.git",
+  "author": "tsunoda1 <tsunoda@b2ml.com.br>",
+  "license": "MIT",
+  "scripts": {
+    "start": "tsnd --transpile-only --respawn --ignore-watch node_modules src/server.ts"
+  },
+  "dependencies": {
+    "express": "^4.17.1",
+    "ts-node": "^9.0.0",
+    "ts-node-dev": "^1.0.0-pre.59",
+    "typescript": "^4.0.2"
+  }
+}
