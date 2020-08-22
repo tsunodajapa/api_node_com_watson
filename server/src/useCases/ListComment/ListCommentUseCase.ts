@@ -1,16 +1,15 @@
 import  ICommentsRepository from "../../repositories/ICommentsRepository";
-
+import { classToClass } from 'class-transformer';
 export class ListCommentUseCase {
   constructor(
     private commentRepository: ICommentsRepository,
-
   ) {}
 
   async execute(){
 
-    const users = await this.commentRepository.findAll();
+    const comments = await this.commentRepository.findAll();
 
-    return users;
+    return classToClass(comments);
     
   }
 }
