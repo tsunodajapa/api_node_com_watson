@@ -15,9 +15,19 @@ class MysqlCommentsRepository implements ICommentsRepository {
   }
 
   public async findAll(): Promise<Comment[]> {
-    const comments = await this.commentRepository.find();
+    const comments = await this.commentRepository.find({
+      order: {
+        id: "DESC"
+      }
+    });
 
     return comments;
+  }
+
+  public async findByText(text: string): Promise<Comment> {
+    const comment = await this.commentRepository.findOne({text});
+
+    return comment;
   }
 }
 

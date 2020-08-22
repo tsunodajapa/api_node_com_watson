@@ -11,7 +11,7 @@ export class Comment {
     @Column("text")
     text: string;
 
-    @Column("varchar")
+    @Column({length: 255, name: "file_name"})
     filename: string;
 
     @Expose({ name: 'audio_url' })

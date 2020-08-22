@@ -1,4 +1,5 @@
 import { injectable, inject } from 'tsyringe';
+import { classToClass } from 'class-transformer';
 
 import { Comment } from "./../../entities/Comment";
 import  ICommentsRepository  from "./../../repositories/ICommentsRepository";
@@ -18,6 +19,12 @@ export class CreateCommentUseCase {
 
   async execute(data: ICreateCommentRequestDTO) {
 
+    const commentAlreadyExists = await this.commentRepository.findByText(data.text);
+
+    if(commentAlreadyExists){
+      throw new Error("Comment already exists.");
+    }
+
     // first try to create the audio file
     const fileName = await this.ibmWatsonProvider.createSpeech(data.text);
   
@@ -28,6 +35,6 @@ export class CreateCommentUseCase {
 
     await this.commentRepository.save(comment);
 
-    return comment;
+    return classToClass(comment);;
   }
 }
