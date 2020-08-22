@@ -1,5 +1,5 @@
 import { Comment } from "./../../entities/Comment";
-import  ICommentsRepository  from "./../ICommentsRepository";
+import ICommentsRepository from "./../ICommentsRepository";
 import { getRepository } from "typeorm";
 
 class MysqlCommentsRepository implements ICommentsRepository {
