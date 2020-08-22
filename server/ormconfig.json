@@ -7,5 +7,7 @@
     "database": "watson",
     "entities": [
        "./src/entities/*.ts"
-    ]
+    ],
+    "synchronize": true,
+    "logging": false
 }

@@ -1,14 +1,18 @@
-import {createConnection} from "typeorm";
-import path from 'path';
-import express from 'express';
-import { router } from './routes';
+import path from "path";
+import express from "express";
+import cors from "cors";
+import { createConnections } from "typeorm";
 
-createConnection();
+import { router } from "./routes";
+
+createConnections();
 
 const app = express();
-
-app.use(express.json());
 app.use(router);
 
+app.use(cors());
+app.use(express.json());
 
-export { app }
+app.use("/uploads", express.static(path.resolve(__dirname, "..", "uploads")));
+
+export { app };

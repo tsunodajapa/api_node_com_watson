@@ -1,6 +1,8 @@
 import {Entity, Column, PrimaryGeneratedColumn} from 'typeorm';
 
-@Entity()
+import { Expose } from 'class-transformer';
+
+@Entity('comments')
 export class Comment {
 
     @PrimaryGeneratedColumn()
@@ -9,4 +11,11 @@ export class Comment {
     @Column("text")
     text: string;
 
+    @Column("varchar")
+    filename: string;
+
+    @Expose({ name: 'audio_url' })
+    getAudioUrl(): string {
+        return `${process.env.APP_API_URL}/uploads/${this.filename}`;
+    }
 }
