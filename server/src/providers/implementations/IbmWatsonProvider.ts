@@ -10,7 +10,6 @@ import { Readable } from "stream";
 
 export class IbmWatsonProvider implements IIBMWatsonProvider {
   private textToSpeech: TextToSpeechV1;
-  private fileName: string;
 
   constructor() {
 
@@ -20,12 +19,14 @@ export class IbmWatsonProvider implements IIBMWatsonProvider {
       }),
       url: process.env.API_IBM_URL,
     });
-
-    this.fileName = `${this.generateHash()}_speech.wav`;
     
   }
 
   async createSpeech(text: string): Promise<string> {
+
+    
+    const fileName = `${this.generateHash()}_speech.wav`;
+
     const synthesizeParams = {
       text: text,
       accept: "audio/wav",
@@ -41,9 +42,9 @@ export class IbmWatsonProvider implements IIBMWatsonProvider {
         wavFileStream
       );
 
-      await this.createFile(buffer);
+      await this.createFile(buffer, fileName);
 
-      return this.fileName;
+      return fileName;
     } catch (error) {
       throw new Error(error);
     }
@@ -55,9 +56,9 @@ export class IbmWatsonProvider implements IIBMWatsonProvider {
     return hash;
   }
 
-  private async createFile(buffer: Buffer){
+  private async createFile(buffer: Buffer, fileName: string){
     try {
-      const pathSave = path.resolve(__dirname,"..","..","..","uploads",this.fileName);
+      const pathSave = path.resolve(__dirname,"..","..","..","uploads",fileName);
 
       fs.writeFileSync(pathSave, buffer);
 
