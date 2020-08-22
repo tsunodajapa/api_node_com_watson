@@ -3,3 +3,5 @@
 ormconfig.json
 uploads/*
 yarn.lock
+
+!uploads/.gitkeep 
