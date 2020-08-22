@@ -1,17 +1,21 @@
 import { Comment } from "./../../entities/Comment";
 import ICommentsRepository from "./../ICommentsRepository";
-import { getRepository } from "typeorm";
+import { getRepository, Repository } from "typeorm";
 
 class MysqlCommentsRepository implements ICommentsRepository {
 
+  private commentRepository: Repository<Comment>
+
+  constructor(){
+    this.commentRepository = getRepository(Comment);
+  }
+
   public async save(comment: Comment): Promise<void> {
-    const commentRepository = getRepository(Comment);
-    await commentRepository.save(comment);
+    await this.commentRepository.save(comment);
   }
 
   public async findAll(): Promise<Comment[]> {
-    const commentRepository = getRepository(Comment);
-    const comments = await commentRepository.find();
+    const comments = await this.commentRepository.find();
 
     return comments;
   }

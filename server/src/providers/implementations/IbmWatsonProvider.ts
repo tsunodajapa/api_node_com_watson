@@ -13,14 +13,16 @@ export class IbmWatsonProvider implements IIBMWatsonProvider {
   private fileName: string;
 
   constructor() {
+
     this.textToSpeech = new TextToSpeechV1({
       authenticator: new IamAuthenticator({
-        apikey: `${process.env.API_IBM_KEY}`,
+        apikey: process.env.API_IBM_KEY,
       }),
       url: process.env.API_IBM_URL,
     });
 
     this.fileName = `${this.generateHash()}_speech.wav`;
+    
   }
 
   async createSpeech(text: string): Promise<string> {

@@ -1,15 +1,17 @@
 import { Router } from "express";
-import { createCommentController } from "./useCases/CreateComment";
-import { listCommentController } from "./useCases/ListComment";
+import CreateCommentController  from "./useCases/CreateComment/CreateCommentController";
+import  ListCommentController from "./useCases/ListComment/ListCommentController";
 
-const router = Router();
+const routes = Router();
+const createCommentController = new CreateCommentController();
+const listCommentController = new ListCommentController();
 
-router.post("/comments", (request, response) => {
-  return createCommentController.handle(request, response);
+routes.post("/comments", (request, response) => {
+  createCommentController.handle(request, response);
 });
 
-router.get("/comments", (request, response) => {
-  return listCommentController.handle(request, response);
+routes.get("/comments", (request, response) => {
+  listCommentController.handle(request, response);
 });
 
-export { router };
+export { routes };

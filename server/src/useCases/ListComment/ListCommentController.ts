@@ -1,13 +1,15 @@
 import { Request, Response } from "express";
 import { ListCommentUseCase } from "./ListCommentUseCase";
+import { container } from 'tsyringe';
 
-export class ListCommentController {
-  constructor(private listCommentUseCase: ListCommentUseCase) {}
+export default class ListCommentController {
 
   async handle(request: Request, response: Response): Promise<Response> {
 
+    const listCommentUseCase = container.resolve(ListCommentUseCase);
+
     try {
-      const listComments = await this.listCommentUseCase.execute();
+      const listComments = await listCommentUseCase.execute();
 
       return response.json(listComments);
       

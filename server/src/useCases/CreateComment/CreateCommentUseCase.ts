@@ -1,11 +1,17 @@
+import { injectable, inject } from 'tsyringe';
+
 import { Comment } from "./../../entities/Comment";
 import  ICommentsRepository  from "./../../repositories/ICommentsRepository";
 import { ICreateCommentRequestDTO } from "./CreateCommentDTO";
 import { IIBMWatsonProvider } from "../../providers/IIbmWatsonProvider";
 
+@injectable()
 export class CreateCommentUseCase {
   constructor(
+    @inject('MysqlCommentsRepository')
     private commentRepository: ICommentsRepository,
+
+    @inject('IbmWatsonProvider')
     private ibmWatsonProvider: IIBMWatsonProvider
 
   ) {}
@@ -23,6 +29,5 @@ export class CreateCommentUseCase {
     await this.commentRepository.save(comment);
 
     return comment;
-
   }
 }

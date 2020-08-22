@@ -1,8 +1,14 @@
-import  ICommentsRepository from "../../repositories/ICommentsRepository";
+import { injectable, inject } from 'tsyringe';
 import { classToClass } from 'class-transformer';
+
+import ICommentsRepository from "../../repositories/ICommentsRepository";
+
+@injectable()
 export class ListCommentUseCase {
   constructor(
-    private commentRepository: ICommentsRepository,
+    @inject('MysqlCommentsRepository')
+    private commentRepository: ICommentsRepository
+
   ) {}
 
   async execute(){

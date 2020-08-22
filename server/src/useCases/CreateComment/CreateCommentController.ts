@@ -1,15 +1,18 @@
 import { Request, Response } from "express";
 import { CreateCommentUseCase } from "./CreateCommentUseCase";
+import { container } from 'tsyringe';
 
-export class CreateCommentController {
-  constructor(
-    private createCommentUseCase: CreateCommentUseCase) {}
+export default class CreateCommentController {
 
-  async handle(request: Request, response: Response): Promise<Response> {
+
+  public async handle(request: Request, response: Response): Promise<Response> {
+
     const { text } = request.body;
 
+    const createCommentUseCase = container.resolve(CreateCommentUseCase);
+    
     try {
-      const comment = await this.createCommentUseCase.execute({
+      const comment = await createCommentUseCase.execute({
         text,
       });
 
