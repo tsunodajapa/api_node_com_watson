@@ -8,9 +8,10 @@ import { router } from "./routes";
 createConnections();
 
 const app = express();
-app.use(router);
 
 app.use(cors());
+app.use(router);
+
 app.use(express.json());
 
 app.use("/uploads", express.static(path.resolve(__dirname, "..", "uploads")));
