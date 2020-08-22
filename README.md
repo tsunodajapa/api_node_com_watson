@@ -10,6 +10,7 @@
 
 
 #### Este projeto tem como objetivo criar áudios através da API da IBM
+Foi utilizado arquitetura SOLID no back-end
 
 ## Requisitos de instalação
 
