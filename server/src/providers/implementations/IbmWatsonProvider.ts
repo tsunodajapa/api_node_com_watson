@@ -24,7 +24,6 @@ export class IbmWatsonProvider implements IIBMWatsonProvider {
 
   async createSpeech(text: string): Promise<string> {
 
-    
     const fileName = `${this.generateHash()}_speech.wav`;
 
     const synthesizeParams = {

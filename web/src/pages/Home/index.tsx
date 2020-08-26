@@ -51,8 +51,12 @@ const Home = () => {
 
 
     } catch (err) {
-      console.log(err.response);
-      alert(err.response.data.message);
+      console.log(err);
+      if(err.response){
+        alert(err.response.data.message);
+      }else{
+        alert("Servidor não encontrado");
+      }
     }
   }
 
